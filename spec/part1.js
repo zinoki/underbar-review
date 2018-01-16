@@ -376,7 +376,7 @@
       });
 
       it('should apply a function to every value in an array', function() {
-        var multiplyByTwo = FILL_ME_IN;
+        var multiplyByTwo = function(num) { return 2 * num; };
 
         expect(_.map([1, 2, 3], multiplyByTwo)).to.eql([2, 4, 6]);
       });
@@ -399,7 +399,7 @@
           { name: 'curly', age: 50 }
         ];
 
-        expect(_.pluck(people, 'name')).to.FILL_ME_IN(['moe', 'curly']);
+        expect(_.pluck(people, 'name')).to.deep.equal(['moe', 'curly']);
       });
 
       it('should not modify the original array', function() {
@@ -410,7 +410,7 @@
 
         _.pluck(people, 'name');
 
-        expect(people).to.FILL_ME_IN([{ name: 'moe', age: 30 }, { name: 'curly', age: 50 }]);
+        expect(people).to.deep.equal([{ name: 'moe', age: 30 }, { name: 'curly', age: 50 }]);
       });
     });
 
