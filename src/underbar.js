@@ -98,6 +98,17 @@
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+    var results = [];
+    var obj = {};
+
+    iterator = iterator === undefined ? _.identity : iterator;
+    for (var i = 0; i < array.length; i++) {
+      if (obj[iterator(array[i])] === undefined){
+        obj[iterator(array[i])] = i;
+        results.push(array[i]);
+      } 
+    }
+    return results;
   };
 
 
