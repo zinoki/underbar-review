@@ -200,13 +200,19 @@
     return !!_.reduce(collection, function(accumulator, item) {
       return iterator(item) && accumulator;
     }, true);
-    // TIP: Try re-using reduce() here.
+    // TIP: Try re-using reduce() here.  
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
   // provided, provide a default one
   _.some = function(collection, iterator) {
-    // TIP: There's a very clever way to re-use every() here.
+  // TIP: There's a very clever way to re-use every() here.
+    iterator = iterator === undefined ? _.identity : iterator;
+      
+    return !!_.reduce(collection, function(accumulator, item) {
+      return iterator(item) || accumulator;
+    }, false);
+    
   };
 
 
