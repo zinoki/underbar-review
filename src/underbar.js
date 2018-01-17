@@ -299,6 +299,22 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+   
+    var answers = {};
+    return function(){
+      var newargs = JSON.stringify(Array.prototype.slice.call(arguments)); 
+      if (answers[newargs] === undefined){
+        answers[newargs] = func.apply(this,arguments);
+      // console.log('arguments in if statement',newargs, answers[newargs]);
+        return answers[newargs];
+      } else {
+    //   console.log('arguments in else statement',newargs, answers[newargs]);
+      // console.log(JSON.stringify(newargs));
+        return answers[newargs];
+      }
+
+    };
+
   };
 
   // Delays a function for the given number of milliseconds, and then calls
