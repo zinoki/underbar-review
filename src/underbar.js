@@ -166,12 +166,15 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function(collection, iterator, accumulator) {
-    var result = collection.slice();
-    if (arguments[2] === undefined) {
-      accumulator = collection[0];
-      result = collection.slice(1);
+    
+    if (Array.isArray(collection)){
+      var result = collection.slice();
+      if (arguments[2] === undefined) {
+        accumulator = collection[0];
+        result = collection.slice(1);
+      }
     }
-    _.each(result, function(num) {
+    _.each(result || collection, function(num) {
       accumulator = iterator(accumulator, num);
     });
 
@@ -193,6 +196,10 @@
 
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
+    iterator = iterator === undefined ? _.identity : iterator;
+    return !!_.reduce(collection, function(accumulator, item) {
+      return iterator(item) && accumulator;
+    }, true);
     // TIP: Try re-using reduce() here.
   };
 
